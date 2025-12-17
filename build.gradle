@@ -112,6 +112,14 @@ tasks.register('syncAppVersion') {
     }
 }
 
+// Guard: only run syncAppVersion when desktop UI is enabled and the Tauri config exists
+tasks.named("syncAppVersion") {
+    onlyIf {
+        System.getenv("STIRLING_PDF_DESKTOP_UI")?.toBoolean() == true &&
+        file("frontend/src-tauri/tauri.conf.json").exists()
+    }
+}
+
 tasks.register('writeVersion', WriteProperties) {
     destinationFile = layout.projectDirectory.file('app/common/src/main/resources/version.properties')
     println "Writing version.properties to ${destinationFile.get().asFile.path}"
