@@ -223,6 +223,10 @@ subprojects {
 
     if (name == 'stirling-pdf') {
         apply plugin: 'org.springdoc.openapi-gradle-plugin'
+        
+        springBoot {
+        mainClass = 'stirling.software.SPDF.SPDFApplication'
+        }
 
         openApi {
             apiDocsUrl = "http://localhost:8080/v1/api-docs"
